@@ -1,0 +1,18 @@
+﻿%%{init: {'theme': 'default'}}%%
+flowchart TD
+    A([Normal Operation]) --> B{Failure Trigger}
+    B -->|Timeout|      C[Retry with back-off]
+    B -->|Error rate|   D[Circuit Breaker Opens]
+    B -->|Queue full|   E[Backpressure / Shedding]
+
+    C --> F{Retry success?}
+    F -->|Yes| G([Recovered])
+    F -->|No|  H[Dead-Letter Queue]
+
+    D --> I[Fallback Response]
+    E --> J[429 / Drop Request]
+
+    style A fill:#9f9,stroke:#333
+    style G fill:#9f9,stroke:#333
+    style H fill:#f99,stroke:#333
+    style J fill:#f99,stroke:#333

@@ -1,0 +1,16 @@
+﻿%%{init: {'theme': 'default'}}%%
+graph TD
+    Client["Client / Caller"]
+    ServiceA["Service A"]
+    ServiceB["Service B"]
+    DB[("Database")]
+    Queue["Message Queue"]
+
+    Client --> ServiceA
+    ServiceA --> Queue
+    Queue --> ServiceB
+    ServiceB --> DB
+
+    style Client  fill:#f9f,stroke:#333
+    style DB      fill:#bbf,stroke:#333
+    style Queue   fill:#bfb,stroke:#333

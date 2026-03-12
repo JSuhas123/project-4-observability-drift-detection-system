@@ -1,0 +1,15 @@
+﻿%%{init: {'theme': 'default'}}%%
+sequenceDiagram
+    participant C  as Client
+    participant SA as Service A
+    participant Q  as Queue
+    participant SB as Service B
+    participant DB as Database
+
+    C  ->>  SA : Request
+    SA ->>  Q  : Enqueue message
+    Q  -->> SA : Ack
+    SA -->> C  : 202 Accepted
+    Q  ->>  SB : Deliver message
+    SB ->>  DB : Persist state
+    DB -->> SB : OK
